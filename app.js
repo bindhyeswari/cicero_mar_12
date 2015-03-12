@@ -5,6 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test', function (err) {
+  if (err) console.log('could not connect to mongodb');
+  else console.log('connected to mongodb ... ');
+});
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
