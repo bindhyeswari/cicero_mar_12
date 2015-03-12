@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+
+    </script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <input type="file"/>
+    <script>
+
+        document.querySelector('input[type="file"]').addEventListener('change', function () {
+            var files = this.files;
+
+            var formdata = new FormData();
+            formdata.append('name', 'bp');
+            formdata.append('filename', files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/uploads');
+            xhr.setRequestHeader('accept', 'application/json');
+            // xhr.setRequestHeader('content-type', 'application/json');
+            xhr.addEventListener('readystatechange', function () {
+                if( xhr.readyState === 4 && xhr.status === 200 ) {
+                    var obj = JSON.parse(xhr.responseText);
+                    console.log(obj);
+                }
+            });
+            xhr.send(formdata);
+
+        });
+
+    </script>
+  </body>
+</html>
